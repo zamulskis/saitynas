@@ -1,0 +1,26 @@
+version: '3'
+services:
+  flask:
+    build: ./backend
+    container_name: backend
+    entrypoint:
+      - flask
+      - run
+      - --host=0.0.0.0
+      - --port=8000
+    environment:
+      FLASK_DEBUG: 1
+      FLASK_APP: ./app.py
+    # restart: always
+    ports: ['8001:8000']
+    volumes: ['./backend:/backend']
+    working_dir: /backend
+  react:
+    build: ./frontend
+    container_name: frontend
+    # restart: always
+    ports: ['8002:3000']
+    volumes: ['./frontend:/frontend']
+    working_dir: /frontend
+
+  
